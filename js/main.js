@@ -3,10 +3,12 @@
 
   // ========== Mobile Navigation ==========
   var navToggle = document.querySelector('.nav-toggle');
+  var navWrap = document.querySelector('.header-nav-wrap');
   var navMain = document.querySelector('.nav-main');
-  if (navToggle && navMain) {
+  if (navToggle && navWrap && navMain) {
     navToggle.addEventListener('click', function () {
-      var open = navMain.classList.toggle('is-open');
+      var open = navWrap.classList.toggle('is-open');
+      navMain.classList.toggle('is-open', open);
       navToggle.setAttribute('aria-expanded', open);
       navToggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
     });

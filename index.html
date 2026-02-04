@@ -16,32 +16,69 @@
     <div class="container header-inner">
       <a href="index.html" class="logo-wrap">
         <div class="logo-img" aria-hidden="true"><span>Logo</span></div>
-        <span class="logo">Firmen<span>name</span></span>
+        <span class="logo-text">
+          <span class="logo">Wärme<span>Werk</span></span>
+          <span class="logo-tagline">Fußbodenheizung & Hydraulik</span>
+        </span>
       </a>
       <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
-      <nav>
-        <ul class="nav-main">
-          <li><a href="index.html" aria-current="page">Startseite</a></li>
-          <li><a href="leistungen.html">Leistungen</a></li>
-          <li><a href="ueber-uns.html">Über uns</a></li>
-          <li><a href="referenzen.html">Referenzen</a></li>
-          <li><a href="kontakt.html">Kontakt</a></li>
-        </ul>
-      </nav>
+      <div class="header-nav-wrap">
+        <nav>
+          <ul class="nav-main">
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="leistungen.html#systeme">Systeme</a></li>
+            <li><a href="index.html#kalkulator">Kalkulator</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="index.html" aria-current="page">Startseite</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-phone">
+        <a href="tel:+4959577992964" class="btn">📞 05957 799 29 64</a>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- Hero: klarer Kundennutzen + direkte CTAs -->
+    <!-- Hero: Trust-Badge, zweizeilige Headline, Formular rechts (WärmeWerk) -->
     <section class="hero hero-with-image">
-      <div class="container">
-        <div class="hero-title-wrap">
-          <span class="hero-line" aria-hidden="true"></span>
-          <h1>Fußbodenheizung: Installation, Wartung und Modernisierung aus einer Hand</h1>
+      <div class="container hero-split">
+        <div class="hero-content">
+          <span class="hero-trust-badge">Fachbetrieb für komfortable & effiziente Wärme</span>
+          <div class="hero-title-wrap">
+            <span class="hero-line" aria-hidden="true"></span>
+            <div>
+              <h1>Ihre Experten für</h1>
+              <span class="hero-accent">Fußbodenheizung</span>
+            </div>
+          </div>
+          <p class="lead">Von der Beratung bis zur fachgerechten Verlegung: Wir finden die beste Lösung für Ihr Zuhause – ob Matten oder Tackerplatten. Energieeffizient, zuverlässig, aus einer Hand.</p>
+          <div class="hero-buttons">
+            <a href="kontakt.html?anfrage=angebot" class="btn btn-primary">Kostenloses Angebot anfordern →</a>
+            <a href="#verlegesysteme" class="btn btn-outline hero-btn-outline">Unsere Systeme</a>
+          </div>
         </div>
-        <p class="lead">Energieeffiziente Flächenheizung für Neubau und Bestand – fachgerecht geplant, sauber verlegt, zuverlässig gewartet. Privat- und Gewerbekunden in Bellingwolde und Umgebung.</p>
-        <a href="kontakt.html?anfrage=angebot" class="btn btn-primary">Kostenloses Angebot anfordern</a>
-        <a href="kontakt.html?anfrage=beratung" class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.8); margin-left: 0.5rem;">Beratung anfragen</a>
+        <div class="hero-form-card">
+          <span class="form-quick-tag">⚡ Schnell</span>
+          <h3>Offerte auf Maß</h3>
+          <p class="form-sub">Persönliche Beratung & Planung.</p>
+          <form class="hero-quick-form" action="kontakt.html" method="get">
+            <div class="form-group">
+              <label for="hero-name">Vollständiger Name</label>
+              <input type="text" id="hero-name" name="name" placeholder="z. B. Max Mustermann">
+            </div>
+            <div class="form-group">
+              <label for="hero-email">E-Mail Adresse</label>
+              <input type="email" id="hero-email" name="email" placeholder="ihre@mail.de">
+            </div>
+            <div class="form-group">
+              <label for="hero-tel">Telefonnummer</label>
+              <input type="tel" id="hero-tel" name="tel" placeholder="05957 – ">
+            </div>
+            <button type="submit" class="btn btn-primary">Jetzt Kontakt aufnehmen</button>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -56,41 +93,48 @@
       </div>
     </section>
 
-    <!-- Systemen: Verlegung auf Netzen / Tackerplatten -->
-    <section class="section section-alt">
+    <!-- Unsere Verlegesysteme: zwei Karten mit Checkmarks (WärmeWerk) -->
+    <section class="section section-alt" id="verlegesysteme">
       <div class="container">
-        <h2 class="block-title reveal">Verlegesysteme</h2>
-        <div class="content-block reveal reveal-delay-1">
-          <h3>Fußbodenheizung auf Netzen (Nasssystem)</h3>
-          <p>Die Heizungsrohre werden auf vorgefertigten Verlegenetzen befestigt; der Mittenabstand (z. B. 100 mm oder 150 mm) wird an Ihre Wärmebedarf-Berechnung angepasst. Anschließend erfolgt der Estrichaufbau. Diese Variante eignet sich besonders für Neubauten und Sanierungen mit Nassestrich. <strong>Ihr Nutzen:</strong> Hohe Wärmespeicherung, gleichmäßige Abgabe, bewährte Technik. Mit oder ohne Dämmung je nach Untergrund.</p>
-        </div>
-        <div class="content-block reveal reveal-delay-2">
-          <h3>Fußbodenheizung auf Tackerplatten (Trockensystem)</h3>
-          <p>Die Rohre werden auf festen Dämmplatten mit Klammern fixiert – ohne nassen Estrich. Ideal für die Nachrüstung im Altbau, für Aufbauten auf bestehenden Böden und über Holzbalkendecken. <strong>Ihr Nutzen:</strong> Geringe Aufbauhöhe, kurze Trocknungszeiten, schnelle Belegbarkeit. Wir wählen das passende System gemeinsam mit Ihnen aus.</p>
+        <h2 class="section-title reveal">Unsere Verlegesysteme</h2>
+        <p class="section-intro reveal" style="text-align: center; margin-left: auto; margin-right: auto;">Wir nutzen bewährte Methoden für unterschiedliche Anforderungen und Bodenaufbauten.</p>
+        <div class="system-cards">
+          <article class="system-card reveal reveal-delay-1">
+            <h3>Fußbodenheizung auf Netzen</h3>
+            <p>Präzise Rohrfixierung auf Verlegenetzen, optimale Wärmeverteilung und flexibel einsetzbar – mit oder ohne Dämmung.</p>
+            <ul>
+              <li>Präzise Verlegeabstände</li>
+              <li>Hohe Stabilität</li>
+              <li>Mit/Ohne Dämmung</li>
+            </ul>
+          </article>
+          <article class="system-card reveal reveal-delay-2">
+            <h3>Fußbodenheizung auf Tackerplatten</h3>
+            <p>Feste Dämmplatte als Untergrund, Rohre mit Tackerklammern fixiert – schnelle Montage und integrierte Wärmedämmung.</p>
+            <ul>
+              <li>Integrierte Wärmedämmung</li>
+              <li>Schnelle Montage</li>
+              <li>Hoher Wirkungsgrad</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Vertrauenselemente: Erfahrung, Zuverlässigkeit, saubere Arbeit -->
-    <section class="section trust-block">
-      <div class="container">
-        <h2 class="block-title reveal">Warum Kunden uns beauftragen</h2>
-        <div class="usp-grid">
-          <article class="usp-card reveal reveal-delay-1">
-            <div class="icon" aria-hidden="true">📐</div>
-            <h3>Erfahrung & Fachkompetenz</h3>
-            <p>Wir planen und verlegen Fußbodenheizungen seit Jahren – Nass- und Trockensysteme, Neubau und Altbau. Die Auslegung stimmen wir auf Ihre Heizungsanlage und den Wärmebedarf ab.</p>
-          </article>
-          <article class="usp-card reveal reveal-delay-2">
-            <div class="icon" aria-hidden="true">✓</div>
-            <h3>Zuverlässigkeit & Qualität</h3>
-            <p>Arbeit nach anerkannten Regeln der Technik, Material von bewährten Herstellern. Feste Termine, transparente Preise und eine klare Abnahme mit Dokumentation.</p>
-          </article>
-          <article class="usp-card reveal reveal-delay-3">
-            <div class="icon" aria-hidden="true">🔧</div>
-            <h3>Saubere, termingerechte Arbeit</h3>
-            <p>Wir räumen nach der Verlegung auf, halten Absprachen ein und stören den laufenden Betrieb so wenig wie nötig. Für Gewerbekunden auch außerhalb der üblichen Bürozeiten möglich.</p>
-          </article>
+    <!-- Willkommen bei WärmeWerk: Trust-Badges + Zitat-Karte (WärmeWerk) -->
+    <section class="section welcome-block">
+      <div class="container two-col welcome-grid">
+        <div class="welcome-text reveal">
+          <h2 class="block-title">Willkommen bei WärmeWerk</h2>
+          <p>Wir sind Ihr Fachbetrieb für <strong>Fußbodenheizung</strong> in Bellingwolde und Umgebung. Unser Fokus: Komfort, Effizienz und Qualität. Unser Team plant und verlegt Ihre Anlage fachgerecht – von der Beratung bis zur Abnahme. Mit Stolz liefern wir zuverlässige, langlebige Lösungen für Privat- und Gewerbekunden.</p>
+          <div class="trust-badges">
+            <span class="trust-badge">100% Zufriedenheit</span>
+            <span class="trust-badge">Meister Qualität</span>
+          </div>
+        </div>
+        <div class="welcome-right reveal reveal-delay-1">
+          <div class="img-placeholder">Team bei der Arbeit</div>
+          <div class="quote-card">„Qualität, die man spürt.“</div>
         </div>
       </div>
     </section>
@@ -103,8 +147,8 @@
       </div>
     </section>
 
-    <!-- Unsere Schritte -->
-    <section class="section steps-section">
+    <!-- Unsere Schritte / Ablauf -->
+    <section class="section steps-section" id="kalkulator">
       <div class="container">
         <div class="steps-title reveal">
           <h2>So gehen wir vor</h2>
@@ -158,7 +202,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 [Firmenname]. Alle Rechte vorbehalten.</p>
+        <p>&copy; 2025 WärmeWerk. Alle Rechte vorbehalten.</p>
       </div>
     </div>
   </footer>

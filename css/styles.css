@@ -4,24 +4,25 @@
    ============================================ */
 
 :root {
-  /* Referenz: W.T.M. – Weiß, Dunkelblau, Grün-Akzent */
+  /* Referenz: WärmeWerk – Dunkelblau, Weiß, Orange-Braun-Akzent */
   --color-primary: #0d3b66;
   --color-primary-light: #1a5a8e;
-  --color-nav: #0d3b66;
-  --color-accent: #2d7a4f;
-  --color-accent-hover: #246b43;
+  --color-accent: #b85c38;
+  --color-accent-hover: #a04d2a;
   --color-dark: #1a1a1a;
   --color-text: #333;
   --color-text-muted: #5c5c5c;
   --color-bg: #fff;
   --color-bg-alt: #f5f6f7;
+  --color-bg-warm: #faf8f6;
   --color-white: #fff;
   --font-heading: 'Outfit', 'Segoe UI', sans-serif;
   --font-body: 'DM Sans', 'Segoe UI', sans-serif;
-  --shadow: 0 2px 12px rgba(0,0,0,0.06);
-  --shadow-hover: 0 6px 24px rgba(0,0,0,0.1);
-  --radius: 6px;
-  --radius-lg: 10px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.06);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+  --radius: 8px;
+  --radius-lg: 14px;
+  --radius-card: 16px;
   --radius-btn: 8px;
   --transition: 0.25s ease;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -119,10 +120,10 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 .reveal-delay-5 { transition-delay: 0.5s; }
 .reveal-delay-6 { transition-delay: 0.6s; }
 
-/* Header: Schatten beim Scrollen */
+/* Header: WärmeWerk – weißer Hintergrund, Logo links, Nav mittig, Tel-Button rechts */
 .site-header {
-  background: var(--color-primary);
-  box-shadow: none;
+  background: var(--color-white);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -130,34 +131,38 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 }
 
 .site-header.scrolled {
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
 }
 
 .site-header .header-inner {
-  padding: 0.9rem 0;
+  padding: 0.85rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-/* Logo-Bereich: horizontal bündig (Logo + Firmenname auf einer Linie) */
+/* Logo: Icon (orange) + Firmenname + Tagline darunter */
 .logo-wrap {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   gap: 0.75rem;
   text-decoration: none;
-  color: var(--color-white);
+  color: var(--color-primary);
 }
 
 .logo-img {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--color-white) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #d47850 100%);
   border-radius: 50%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary);
-  font-size: 0.7rem;
+  color: var(--color-white);
+  font-size: 0.65rem;
   font-weight: 700;
   text-align: center;
   line-height: 1.1;
@@ -165,16 +170,28 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 }
 .logo-img span { display: block; }
 
+.site-header .logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
 .site-header .logo {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--color-white);
+  font-size: 1.25rem;
+  color: var(--color-primary);
   margin: 0;
+  line-height: 1.2;
 }
 
-.site-header .logo span {
-  color: rgba(255,255,255,0.9);
+.site-header .logo-tagline {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 0.15rem;
 }
 
 .nav-toggle {
@@ -184,13 +201,21 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   padding: 0.5rem;
   cursor: pointer;
   font-size: 1.5rem;
-  color: var(--color-white);
+  color: var(--color-primary);
+}
+
+/* Nav mittig (zwischen Logo und Tel-Button) */
+.header-nav-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
 }
 
 .nav-main {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.15rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -200,14 +225,38 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   display: block;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  color: var(--color-white);
+  color: var(--color-primary);
   border-radius: var(--radius);
 }
 
 .nav-main a:hover,
 .nav-main a[aria-current="page"] {
+  color: var(--color-accent);
+  background: rgba(184, 92, 56, 0.08);
+}
+
+/* Telefon-Button rechts im Header */
+.header-phone {
+  flex-shrink: 0;
+}
+
+.header-phone .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  background: var(--color-primary);
   color: var(--color-white);
-  background: rgba(255,255,255,0.15);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  transition: background var(--transition);
+}
+
+.header-phone .btn:hover {
+  background: var(--color-primary-light);
+  color: var(--color-white);
 }
 
 /* Inhaltsseiten: Header bleibt dunkelblau (gleiche Klasse) */
@@ -290,6 +339,35 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   z-index: 1;
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-content .lead {
+  margin: 0 0 1.5rem;
+  max-width: 540px;
+  color: rgba(255,255,255,0.95);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.hero-btn-outline {
+  color: rgba(255,255,255,0.95) !important;
+  border-color: rgba(255,255,255,0.7) !important;
+}
+
+.hero-btn-outline:hover {
+  background: rgba(255,255,255,0.15) !important;
+  color: var(--color-white) !important;
+  border-color: var(--color-white) !important;
+}
+
 .hero-with-image .hero-title-wrap {
   display: flex;
   align-items: flex-start;
@@ -312,9 +390,123 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   line-height: 1.2;
 }
 
+.hero-with-image .hero-accent {
+  display: block;
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0.25rem 0 0.5rem;
+}
+
 .hero-with-image .btn {
   margin-top: 0.5rem;
+  margin-right: 0.5rem;
   transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
+}
+
+/* Trust-Badge im Hero (WärmeWerk) */
+.hero-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-white);
+  color: var(--color-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.hero-trust-badge::before {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Hero-Formular-Karte (rechts, WärmeWerk) */
+.hero-form-card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  max-width: 380px;
+}
+
+.hero-form-card .form-quick-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.hero-form-card h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.hero-form-card .form-sub {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.hero-form-card .form-group {
+  margin-bottom: 1rem;
+}
+
+.hero-form-card .form-group label {
+  font-size: 0.9rem;
+}
+
+.hero-form-card .btn {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+/* Hero-Layout: Links Text, rechts Formular */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2.5rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-form-card input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: var(--radius);
+}
+
+.hero-quick-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.hero-quick-form .form-group:last-of-type {
+  margin-bottom: 1.25rem;
 }
 
 .hero-with-image .btn:hover {
@@ -513,9 +705,120 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 .usp-card {
   background: var(--color-white);
   padding: 1.75rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
   transition: box-shadow var(--transition), transform var(--transition);
+}
+
+/* Verlegesystem-Karten (WärmeWerk: zwei weiße Karten mit Checkmarks) */
+.system-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.system-card {
+  background: var(--color-white);
+  padding: 1.75rem;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.system-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.system-card h3 {
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.system-card ul {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.system-card li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.system-card li::before {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Trust-Badges (100% Zufriedenheit, Meister Qualität) */
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-white);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  box-shadow: var(--shadow);
+  letter-spacing: 0.02em;
+}
+
+/* Zitat-Karte („Qualität, die man spürt.“) */
+.quote-card {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius-card);
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Willkommen-Block: Text links, Bild + Zitat rechts */
+.welcome-block .welcome-grid {
+  align-items: start;
+}
+
+.welcome-text .block-title {
+  margin-bottom: 1rem;
+}
+
+.welcome-text p {
+  margin: 0 0 1rem;
+  color: var(--color-text);
+}
+
+.welcome-right .img-placeholder {
+  margin-bottom: 0;
+}
+
+.welcome-right .quote-card {
+  margin-top: 1rem;
 }
 
 .usp-card:hover {
@@ -835,19 +1138,35 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
     display: block;
   }
 
-  .nav-main {
+  .header-nav-wrap {
     display: none;
+  }
+
+  .header-nav-wrap.is-open {
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     background: var(--color-white);
-    flex-direction: column;
     padding: 1rem;
     box-shadow: var(--shadow);
+    z-index: 50;
   }
 
-  .nav-main.is-open {
+  .header-nav-wrap.is-open .nav-main {
+    flex-direction: column;
+  }
+
+  .header-phone {
+    display: none;
+  }
+
+  .nav-main {
+    display: none;
+  }
+
+  .header-nav-wrap.is-open .nav-main {
     display: flex;
   }
 
@@ -890,6 +1209,25 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
     text-align: center;
   }
 
+  .hero-split {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-content .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
   .hero-with-image .hero-title-wrap {
     flex-direction: column;
     align-items: center;
@@ -903,6 +1241,10 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   .hero .btn {
     display: block;
     margin: 0.5rem 0;
+  }
+
+  .system-cards {
+    grid-template-columns: 1fr;
   }
 }
 
