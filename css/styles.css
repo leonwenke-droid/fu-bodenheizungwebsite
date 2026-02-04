@@ -137,10 +137,11 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   padding: 0.9rem 0;
 }
 
-/* Logo-Bereich: Platzhalter für Grafik + Firmenname – auf dunkelblau mit weißem Text */
+/* Logo-Bereich: horizontal bündig (Logo + Firmenname auf einer Linie) */
 .logo-wrap {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   text-decoration: none;
   color: var(--color-white);
@@ -496,6 +497,12 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   margin: 0.5rem auto 0;
 }
 
+.section-intro {
+  color: var(--color-text);
+  margin: 0 0 2rem;
+  max-width: 720px;
+}
+
 /* ========== USP / Feature Cards ========== */
 .usp-grid {
   display: grid;
@@ -697,14 +704,15 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   color: var(--color-white);
 }
 
-/* CTA-Zeile im Footer: "Noch Fragen?" links, Button rechts */
+/* CTA-Zeile im Footer: mittig */
 .footer-cta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
   padding: 2rem 0;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .footer-cta h2 {
@@ -737,6 +745,16 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   margin-bottom: 0.75rem;
   color: var(--color-white);
   font-weight: 600;
+}
+
+/* Footer-Tabs (Information/Links) mittig */
+.footer-inner > div:last-child {
+  text-align: center;
+}
+
+.footer-inner > div:last-child ul {
+  display: inline-block;
+  text-align: left;
 }
 
 .footer-inner ul {
