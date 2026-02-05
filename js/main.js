@@ -45,6 +45,22 @@
     });
   }
 
+  // Steps-Section: Timeline-Linie einzeichnen wenn sichtbar
+  var stepsSection = document.querySelector('.steps-section');
+  if (stepsSection && 'IntersectionObserver' in window) {
+    var stepsObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { rootMargin: '0px 0px -80px 0px', threshold: 0.2 }
+    );
+    stepsObserver.observe(stepsSection);
+  }
+
   // ========== Kontaktformular-Validierung ==========
   var form = document.querySelector('.contact-form');
   if (form) {

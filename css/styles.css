@@ -4,7 +4,7 @@
    ============================================ */
 
 :root {
-  /* Referenz: WärmeWerk – Dunkelblau, Weiß, Orange-Braun-Akzent */
+  /* Referenz: W.T.M. Fußbodenheizung – Dunkelblau, Weiß, Orange-Braun-Akzent */
   --color-primary: #0d3b66;
   --color-primary-light: #1a5a8e;
   --color-accent: #b85c38;
@@ -20,12 +20,16 @@
   --font-body: 'DM Sans', 'Segoe UI', sans-serif;
   --shadow: 0 2px 16px rgba(0,0,0,0.06);
   --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-hover: 0 12px 40px rgba(0,0,0,0.12);
+  --shadow-glow-accent: 0 0 40px rgba(184, 92, 56, 0.25);
+  --shadow-glow-primary: 0 0 30px rgba(13, 59, 102, 0.2);
   --radius: 8px;
   --radius-lg: 14px;
   --radius-card: 16px;
   --radius-btn: 8px;
   --transition: 0.25s ease;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --reveal-duration: 0.8s;
 }
 
@@ -37,6 +41,11 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .reveal-fade { transition-duration: 0.01ms; }
 }
 
 body {
@@ -103,6 +112,15 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   transform: translateY(0);
 }
 
+/* Karten: leichter Scale beim Einblenden */
+.system-card.reveal {
+  transform: translateY(28px) scale(0.98);
+}
+
+.system-card.reveal.is-visible {
+  transform: translateY(0) scale(1);
+}
+
 .reveal-fade {
   opacity: 0;
   transition: opacity var(--reveal-duration) var(--ease-out-expo);
@@ -119,8 +137,10 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
 .reveal-delay-6 { transition-delay: 0.6s; }
+.reveal-delay-7 { transition-delay: 0.7s; }
+.reveal-delay-8 { transition-delay: 0.8s; }
 
-/* Header: WärmeWerk – weißer Hintergrund, Logo links, Nav mittig, Tel-Button rechts */
+/* Header: W.T.M. Fußbodenheizung – weißer Hintergrund, Logo links, Nav mittig, Tel-Button rechts */
 .site-header {
   background: var(--color-white);
   box-shadow: 0 1px 0 rgba(0,0,0,0.06);
@@ -145,53 +165,38 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 /* Logo: Icon (orange) + Firmenname + Tagline darunter */
 .logo-wrap {
   display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 0.75rem;
-  text-decoration: none;
-  color: var(--color-primary);
-}
-
-.logo-img {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, #d47850 100%);
-  border-radius: 50%;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-align: center;
-  line-height: 1.1;
-  padding: 4px;
-}
-.logo-img span { display: block; }
-
-.site-header .logo-text {
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0;
+  gap: 0.2rem;
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: transform 0.35s var(--ease-out-expo);
 }
 
-.site-header .logo {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.25rem;
+.logo-wrap:hover {
+  transform: scale(1.02);
   color: var(--color-primary);
-  margin: 0;
-  line-height: 1.2;
+}
+
+/* Logo-Bild (SVG W.T.M. Fußbodenheizung – transparent, vektoriell = höchste Qualität) */
+.logo-img {
+  display: block;
+  width: auto;
+  height: 48px;
+  max-width: 260px;
+  object-fit: contain;
+  object-position: left center;
+  flex-shrink: 0;
 }
 
 .site-header .logo-tagline {
   display: block;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--color-text-muted);
-  margin-top: 0.15rem;
+  margin: 0;
+  line-height: 1.2;
 }
 
 .nav-toggle {
@@ -227,6 +232,27 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-weight: 500;
   color: var(--color-primary);
   border-radius: var(--radius);
+  position: relative;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+.nav-main a::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.35rem;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.nav-main a:hover::after,
+.nav-main a[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 
 .nav-main a:hover,
@@ -287,7 +313,27 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 .btn-primary:hover {
   background: var(--color-primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(13, 59, 102, 0.28);
+  box-shadow: 0 8px 28px rgba(13, 59, 102, 0.28), var(--shadow-glow-primary);
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::after {
+  left: 100%;
 }
 
 .btn-secondary {
@@ -332,6 +378,28 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
     linear-gradient(145deg, var(--color-bg-alt) 0%, #dde1e6 100%);
   background-size: cover;
   background-position: center;
+  overflow: hidden;
+}
+
+.hero-with-image::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(184, 92, 56, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  animation: heroGlow 8s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-with-image::before { animation: none; opacity: 0.7; }
 }
 
 .hero-with-image .container {
@@ -398,6 +466,12 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-weight: 700;
   line-height: 1.1;
   margin: 0.25rem 0 0.5rem;
+  text-shadow: 0 0 30px rgba(184, 92, 56, 0.2);
+  transition: text-shadow 0.4s ease;
+}
+
+.hero-with-image .hero-content:hover .hero-accent {
+  text-shadow: 0 0 40px rgba(184, 92, 56, 0.35);
 }
 
 .hero-with-image .btn {
@@ -406,7 +480,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
 }
 
-/* Trust-Badge im Hero (WärmeWerk) */
+/* Trust-Badge im Hero */
 .hero-trust-badge {
   display: inline-flex;
   align-items: center;
@@ -419,6 +493,12 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-weight: 500;
   margin-bottom: 1.5rem;
   box-shadow: var(--shadow-card);
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s ease;
+}
+
+.hero-trust-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
 }
 
 .hero-trust-badge::before {
@@ -435,13 +515,22 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-weight: 700;
 }
 
-/* Hero-Formular-Karte (rechts, WärmeWerk) */
+/* Hero-Formular-Karte (rechts) */
 .hero-form-card {
-  background: var(--color-white);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-card);
   padding: 1.75rem;
   box-shadow: var(--shadow-card);
   max-width: 380px;
+  border: 1px solid rgba(255,255,255,0.8);
+  transition: box-shadow 0.4s ease, transform 0.4s var(--ease-out-expo);
+}
+
+.hero-form-card:focus-within {
+  box-shadow: var(--shadow-glow-primary), 0 12px 40px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
 }
 
 .hero-form-card .form-quick-tag {
@@ -499,6 +588,13 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-size: 1rem;
   border: 1px solid #e0e0e0;
   border-radius: var(--radius);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-form-card input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.15);
 }
 
 .hero-quick-form .form-group {
@@ -569,10 +665,23 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   flex-shrink: 0;
 }
 
-/* Unsere Schritte (Referenz: 01. 02. 03. mit Timeline) */
+/* Unsere Schritte (Referenz: 01. 02. 03. mit Timeline) – Ablauf nacheinander sichtbar */
 .steps-section {
   padding: 3.5rem 0;
   background: var(--color-bg);
+}
+
+/* Titel erscheint zuerst */
+.steps-title-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+.steps-section.is-visible .steps-title-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
 }
 
 .steps-title {
@@ -602,8 +711,10 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   max-width: 900px;
   margin: 0 auto;
   position: relative;
+  --line-scale: 0;
 }
 
+/* Zeitleiste zeichnet sich nach Schritt 01 ein, dauert länger */
 .steps-grid::before {
   content: '';
   position: absolute;
@@ -613,16 +724,45 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   height: 2px;
   background: var(--color-dark);
   z-index: 0;
+  transform: scaleX(var(--line-scale, 0));
+  transform-origin: left;
+  transition: transform 1.4s var(--ease-out-expo);
+  transition-delay: 0.5s;
 }
 
-.step-item {
+.steps-section.is-visible .steps-grid {
+  --line-scale: 1;
+}
+
+/* Schritte erscheinen nacheinander: 01 → 02 → 03 (Kohärenz) */
+.step-item.step-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s var(--ease-out-expo), transform 0.55s var(--ease-out-expo);
   text-align: center;
   position: relative;
   z-index: 1;
-  transition: transform 0.35s var(--ease-out-expo);
 }
 
-.step-item.is-visible {
+.steps-section.is-visible .step-item.step-reveal:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+.steps-section.is-visible .step-item.step-reveal:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1s;
+}
+
+.steps-section.is-visible .step-item.step-reveal:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1.65s;
+}
+
+.step-item {
   transition: transform 0.35s var(--ease-out-expo);
 }
 
@@ -652,6 +792,16 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   background: var(--color-primary);
   border-radius: 50%;
   margin: 0.75rem auto 0;
+  transition: transform 0.4s var(--ease-spring), box-shadow 0.4s ease;
+}
+
+.steps-section.is-visible .step-item .step-dot {
+  box-shadow: 0 0 0 4px rgba(13, 59, 102, 0.2);
+}
+
+.step-item:hover .step-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 6px rgba(13, 59, 102, 0.15);
 }
 
 /* Großes Vollbild (Referenz: Bild unter "Unsere Schritte") */
@@ -710,7 +860,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   transition: box-shadow var(--transition), transform var(--transition);
 }
 
-/* Verlegesystem-Karten (WärmeWerk: zwei weiße Karten mit Checkmarks) */
+/* Verlegesystem-Karten: zwei weiße Karten mit Checkmarks */
 .system-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -723,12 +873,14 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   padding: 1.75rem;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition: box-shadow 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo), border-color 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .system-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1), var(--shadow-glow-accent);
+  transform: translateY(-4px);
+  border-color: rgba(184, 92, 56, 0.15);
 }
 
 .system-card h3 {
@@ -785,11 +937,17 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   color: var(--color-primary);
   box-shadow: var(--shadow);
   letter-spacing: 0.02em;
+  transition: transform 0.35s var(--ease-spring), box-shadow 0.35s ease;
+}
+
+.trust-badge:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-card);
 }
 
 /* Zitat-Karte („Qualität, die man spürt.“) */
 .quote-card {
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: var(--color-white);
   padding: 1.5rem 1.75rem;
   border-radius: var(--radius-card);
@@ -797,6 +955,13 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-size: 1.1rem;
   margin-top: 1rem;
   text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.35s var(--ease-out-expo), box-shadow 0.35s ease;
+}
+
+.quote-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-primary), 0 12px 32px rgba(13, 59, 102, 0.25);
 }
 
 /* Willkommen-Block: Text links, Bild + Zitat rechts */
@@ -876,6 +1041,12 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   font-size: 0.9rem;
   text-align: center;
   padding: 1rem;
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease;
+}
+
+.img-placeholder:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-card);
 }
 
 .img-placeholder.square {
@@ -1096,6 +1267,14 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   text-align: center;
 }
 
+.footer-legal-note {
+  font-size: 0.8rem;
+  max-width: 560px;
+  margin: 0 auto 0.75rem;
+  line-height: 1.45;
+  opacity: 0.9;
+}
+
 /* ========== Page-specific: Two-column layout ========== */
 .two-col {
   display: grid;
@@ -1110,6 +1289,16 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   height: 4px;
   background: var(--color-primary);
   margin-bottom: 1rem;
+  transform-origin: left;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+
+.page-intro.reveal .intro-line {
+  transform: scaleX(0);
+}
+
+.page-intro.reveal.is-visible .intro-line {
+  transform: scaleX(1);
 }
 
 .page-intro .intro-heading {

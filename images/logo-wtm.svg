@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" role="img" aria-label="W.T.M. Fu&#223;bodenheizung">
+  <defs>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="-90">
+      <polygon points="0 0, 10 5, 0 10" fill="#2d8a4e" />
+    </marker>
+  </defs>
+  <!-- Grafik: Zwei Boegen, transparent (kein Hintergrund) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Oberer Bogen: Dunkelblau -->
+    <path stroke="#0d3b66" stroke-width="5" d="M 20 22 Q 52 4 84 22" />
+    <path stroke="#4a90c4" stroke-width="2.5" d="M 28 20 Q 52 8 76 20" />
+    <!-- Unterer Bogen: Gruen mit Pfeilspitze nach oben -->
+    <path stroke="#2d8a4e" stroke-width="5" d="M 22 58 Q 52 76 82 58" marker-end="url(#arrow-green)" />
+    <path stroke="#4a90c4" stroke-width="2.5" d="M 30 56 Q 52 68 74 56" />
+  </g>
+  <text x="100" y="48" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="26" fill="#2d8a4e">W.T.M.</text>
+  <text x="178" y="48" font-family="Arial, Helvetica, sans-serif" font-weight="bold" font-size="26" fill="#0d3b66">Fu&#223;bodenheizung</text>
+</svg>

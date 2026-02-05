@@ -1,6 +1,6 @@
 # Fußbodenheizung – Unternehmenswebsite
 
-Moderne, responsive Unternehmenswebsite in deutscher Sprache für einen Handwerksbetrieb mit Schwerpunkt **Fußbodenheizung** (Installation & Wartung) in **Bellingwolde** / Norddeutschland.
+Moderne, responsive Unternehmenswebsite in deutscher Sprache für einen Handwerksbetrieb mit Schwerpunkt **Fußbodenheizung** (Installation & Wartung) in **Weener** / Norddeutschland.
 
 ## Zielgruppe
 - Privatkunden
@@ -25,13 +25,13 @@ Moderne, responsive Unternehmenswebsite in deutscher Sprache für einen Handwerk
 1. **Kontaktdaten** in allen HTML-Dateien und im Footer:
    - Telefon: `+49 (0) XXX XXXXXXX` → echte Nummer
    - E-Mail: `info@beispiel.de` → echte Adresse
-   - Adresse: `Musterstraße 1, 9695 Bellingwolde` → echte Adresse
+   - Adresse: `Musterstraße 1, 26826 Weener` → echte Adresse
 2. **Bilder**: Alle Bereiche mit „Platzhalter: …“ durch echte Bilder ersetzen (z. B. `<img src="images/hero.jpg" alt="...">`).
 3. **Kontaktformular**: `action="#"` und `method="post"` durch Ihren Backend-Dienst ersetzen (z. B. Formspree, eigenes Script oder CMS).
 
 ## SEO
 - Meta-Description und Keywords auf jeder Seite
-- Begriffe u. a.: Fußbodenheizung, Vloerverwarming, Installation, Wartung, energieeffizient, Handwerk, Bellingwolde, Deutschland
+- Begriffe u. a.: Fußbodenheizung, Vloerverwarming, Installation, Wartung, energieeffizient, Handwerk, Weener, Deutschland
 
 ## Lokal testen
 Dateien direkt im Browser öffnen (z. B. `index.html`) oder einen lokalen Server starten:
@@ -44,4 +44,4 @@ python3 -m http.server 8000
 
 ---
 
-© 2025 – Vorlage für FußbodenWärme / Bellingwolde
+© 2025 – Vorlage für FußbodenWärme / Weener
