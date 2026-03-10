@@ -61,4 +61,13 @@
     stepsObserver.observe(stepsSection);
   }
 
+  // ========== Footer: aktuelles Jahr ==========
+  var yearSpans = document.querySelectorAll('.js-current-year');
+  if (yearSpans.length) {
+    var year = new Date().getFullYear();
+    yearSpans.forEach(function (el) {
+      el.textContent = year;
+    });
+  }
+
 })();
