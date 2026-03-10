@@ -20,7 +20,6 @@
     <div class="container header-inner">
       <a href="index.html" class="logo-wrap">
         <img src="images/logo-wtm.png" alt="W.T.M. Fußbodenheizung" class="logo-img" width="260" height="48">
-        <span class="logo-tagline">Fußbodenheizung & Fräsen</span>
       </a>
       <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
       <nav>
@@ -51,8 +50,12 @@
         <div class="contact-grid">
           <div>
             <h2>Anfrage senden</h2>
-            <p>Füllen Sie das Formular aus. Wir setzen uns innerhalb von ein bis zwei Werktagen mit Ihnen in Verbindung – für ein unverbindliches Angebot, eine Beratung vor Ort oder einen Wartungstermin. Ihre Angaben werden vertraulich behandelt.</p>
-            <form class="contact-form" action="#" method="post" novalidate>
+            <p id="form-intro">Füllen Sie das Formular aus. Ihre Nachricht wird direkt an uns gesendet. Wir melden uns zeitnah.</p>
+            <div id="form-success" class="form-success-msg" role="alert" hidden>
+              <strong>Vielen Dank.</strong> Ihre Nachricht wurde gesendet. Wir melden uns in Kürze bei Ihnen.
+            </div>
+            <div id="form-error" class="form-error-msg" role="alert" hidden></div>
+            <form class="contact-form" id="contact-form" action="https://n8n.srv881499.hstgr.cloud/webhook/b31a0cd3-264e-4e09-9c45-c1f64f695d25" method="post" novalidate target="n8n_target">
               <div class="form-group">
                 <label for="name">Name / Firma *</label>
                 <input type="text" id="name" name="name" required placeholder="Ihr Name oder Firmenname">
@@ -70,6 +73,7 @@
                 <select id="subject" name="subject">
                   <option value="">Bitte wählen …</option>
                   <option value="angebot">Kostenloses Angebot (Installation / Sanierung)</option>
+                  <option value="fraesen">Fräsen / Nachrüstung Bestandsboden</option>
                   <option value="beratung">Beratung anfragen</option>
                   <option value="wartung">Wartungstermin</option>
                   <option value="sonstiges">Sonstiges</option>
@@ -79,8 +83,9 @@
                 <label for="message">Nachricht *</label>
                 <textarea id="message" name="message" required placeholder="Kurze Beschreibung Ihres Anliegens oder Projekts …"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Nachricht senden</button>
+              <button type="submit" class="btn btn-primary contact-form-submit">Nachricht senden</button>
             </form>
+            <iframe name="n8n_target" id="n8n_target" title="n8n submit target" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;border:0;" aria-hidden="true"></iframe>
           </div>
           <div>
             <div class="contact-info">
@@ -152,11 +157,115 @@
       </div>
       <div class="footer-bottom">
         <p class="footer-legal-note">Die Website wird in deutscher Sprache betrieben. Vertragspartner und ausführendes Unternehmen ist die W.T.M. Vloerverwarming B.V., Niederlande.</p>
+        <p class="footer-credit">Website &amp; Automatisierung: <a href="https://lyniqmedia.com" target="_blank" rel="noopener noreferrer">LYNIQ Media</a> – KI-Systeme für den Mittelstand</p>
         <p>&copy; 2025 W.T.M. Fußbodenheizung. Alle Rechte vorbehalten.</p>
       </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=contact"></script>
+  <script>
+(function () {
+  'use strict';
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var iframe = document.getElementById('n8n_target');
+  var subjectSelect = form.querySelector('[name="subject"]');
+
+  // Prefill from query params (?name=...&email=...&phone=...).
+  // Only fills if the user hasn't typed anything yet.
+  try {
+    var qs = new URLSearchParams(window.location.search);
+    var qName = qs.get('name');
+    var qEmail = qs.get('email');
+    var qPhone = qs.get('phone') || qs.get('tel');
+    var nameEl = form.querySelector('[name="name"]');
+    var emailEl = form.querySelector('[name="email"]');
+    var phoneEl = form.querySelector('[name="phone"]');
+    if (nameEl && !String(nameEl.value || '').trim() && qName) nameEl.value = qName;
+    if (emailEl && !String(emailEl.value || '').trim() && qEmail) emailEl.value = qEmail;
+    if (phoneEl && !String(phoneEl.value || '').trim() && qPhone) phoneEl.value = qPhone;
+  } catch (e) {}
+
+  // Preselect from ?anfrage=
+  try {
+    var anfrage = new URLSearchParams(window.location.search).get('anfrage');
+    if (subjectSelect && anfrage && ['angebot', 'fraesen', 'beratung', 'wartung', 'sonstiges'].indexOf(anfrage) !== -1) {
+      subjectSelect.value = anfrage;
+    }
+  } catch (e) {}
+
+  function setStatus(state, detail) {
+    var errEl = document.getElementById('form-error');
+    var okEl = document.getElementById('form-success');
+    var introEl = document.getElementById('form-intro');
+    if (state === 'success') {
+      if (introEl) introEl.hidden = true;
+      if (okEl) okEl.hidden = false;
+      if (errEl) { errEl.hidden = true; errEl.textContent = ''; }
+      form.hidden = true;
+      return;
+    }
+    if (state === 'error') {
+      if (errEl) { errEl.textContent = detail || 'Senden fehlgeschlagen. Bitte später erneut versuchen oder anrufen.'; errEl.hidden = false; }
+      return;
+    }
+  }
+
+  function validate() {
+    var nameEl = form.querySelector('[name="name"]');
+    var emailEl = form.querySelector('[name="email"]');
+    var messageEl = form.querySelector('[name="message"]');
+    var valid = true;
+    if (nameEl && !String(nameEl.value || '').trim()) { valid = false; nameEl.style.borderColor = '#c00'; } else if (nameEl) nameEl.style.borderColor = '';
+    if (emailEl && !String(emailEl.value || '').trim()) { valid = false; emailEl.style.borderColor = '#c00'; } else if (emailEl) emailEl.style.borderColor = '';
+    if (messageEl && !String(messageEl.value || '').trim()) { valid = false; messageEl.style.borderColor = '#c00'; } else if (messageEl) messageEl.style.borderColor = '';
+    return valid;
+  }
+
+  var btn = form.querySelector('.contact-form-submit');
+  var waiting = false;
+  var timeoutId = null;
+
+  function startWaiting() {
+    waiting = true;
+    if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet …'; }
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(function () {
+      if (!waiting) return;
+      waiting = false;
+      if (btn) { btn.disabled = false; btn.textContent = 'Nachricht senden'; }
+      setStatus('error', 'Keine Antwort vom Server. Bitte später erneut versuchen oder anrufen.');
+    }, 12000);
+  }
+
+  function finish(ok) {
+    waiting = false;
+    if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Nachricht senden'; }
+    if (ok) setStatus('success'); else setStatus('error');
+  }
+
+  if (iframe) {
+    iframe.addEventListener('load', function () {
+      if (waiting) finish(true);
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    if (e) { e.preventDefault(); e.stopPropagation(); }
+    var ok = validate();
+    if (!ok) return false;
+    setStatus('error',''); // clear
+    if (!iframe) {
+      setStatus('error', 'Technischer Fehler: Übertragungsziel fehlt.');
+      return false;
+    }
+    startWaiting();
+    try { form.submit(); } catch (err) { finish(false); }
+    return false;
+  }, true);
+})();
+  </script>
 </body>
 </html>

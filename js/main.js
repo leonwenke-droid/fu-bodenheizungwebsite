@@ -61,28 +61,4 @@
     stepsObserver.observe(stepsSection);
   }
 
-  // ========== Kontaktformular-Validierung ==========
-  var form = document.querySelector('.contact-form');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      var name = form.querySelector('[name="name"]');
-      var email = form.querySelector('[name="email"]');
-      var valid = true;
-      if (name && !name.value.trim()) {
-        valid = false;
-        name.style.borderColor = '#c00';
-      } else if (name) {
-        name.style.borderColor = '';
-      }
-      if (email && !email.value.trim()) {
-        valid = false;
-        email.style.borderColor = '#c00';
-      } else if (email) {
-        email.style.borderColor = '';
-      }
-      if (!valid) {
-        e.preventDefault();
-      }
-    });
-  }
 })();

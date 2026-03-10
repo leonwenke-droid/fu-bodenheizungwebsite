@@ -866,6 +866,9 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 1.5rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .system-card {
@@ -976,6 +979,20 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 .welcome-text p {
   margin: 0 0 1rem;
   color: var(--color-text);
+}
+
+.welcome-image-link {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.welcome-image-link img {
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.welcome-image-link:hover img {
+  transform: scale(1.02);
 }
 
 .welcome-right .img-placeholder {
@@ -1150,6 +1167,24 @@ img.img-placeholder {
   resize: vertical;
 }
 
+.form-success-msg {
+  padding: 1.25rem 1.5rem;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: var(--radius-lg);
+  color: var(--color-dark);
+  margin-bottom: 1.5rem;
+}
+
+.form-error-msg {
+  padding: 1rem 1.25rem;
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+  border-radius: var(--radius-lg);
+  color: #b71c1c;
+  margin-bottom: 1rem;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1288,6 +1323,22 @@ img.img-placeholder {
   margin: 0 auto 0.75rem;
   line-height: 1.45;
   opacity: 0.9;
+}
+
+.footer-credit {
+  margin: 0 auto 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.footer-credit a {
+  color: rgba(255,255,255,0.95);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-credit a:hover {
+  color: #fff;
 }
 
 /* ========== Page-specific: Two-column layout ========== */
@@ -1449,6 +1500,24 @@ img.img-placeholder {
 
   .system-cards {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 980px) {
+  .system-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Medium screens: 2 columns, last card centered */
+@media (min-width: 769px) and (max-width: 979px) {
+  .system-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .system-cards > .system-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 520px;
+    justify-self: center;
   }
 }
 
