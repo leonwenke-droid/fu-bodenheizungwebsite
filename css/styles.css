@@ -4,7 +4,7 @@
    ============================================ */
 
 :root {
-  /* Referenz: W.T.M. Fußbodenheizung – Dunkelblau, Weiß, Orange-Braun-Akzent */
+  /* W.T.M. Fußbodenheizung – einheitliche Design-Tokens */
   --color-primary: #0d3b66;
   --color-primary-light: #1a5a8e;
   --color-accent: #b85c38;
@@ -16,6 +16,8 @@
   --color-bg-alt: #f5f6f7;
   --color-bg-warm: #faf8f6;
   --color-white: #fff;
+  --color-border: #e0e0e0;
+  --color-border-focus: rgba(13, 59, 102, 0.35);
   --font-heading: 'Outfit', 'Segoe UI', sans-serif;
   --font-body: 'DM Sans', 'Segoe UI', sans-serif;
   --shadow: 0 2px 16px rgba(0,0,0,0.06);
@@ -27,10 +29,13 @@
   --radius-lg: 14px;
   --radius-card: 16px;
   --radius-btn: 8px;
+  --radius-input: 8px;
   --transition: 0.25s ease;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --reveal-duration: 0.8s;
+  --section-padding-y: 4rem;
+  --section-padding-y-mobile: 2.75rem;
 }
 
 *,
@@ -41,6 +46,26 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ========== Skip-Link (Accessibility) ========== */
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -80,6 +105,22 @@ a:hover {
   color: var(--color-accent);
 }
 
+/* Focus sichtbar für Tastatur (kein Fokus-Ring bei reiner Maus) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* ========== Typography ========== */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
@@ -98,6 +139,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   margin: 0 auto;
   padding: 0 1.25rem;
 }
+
 
 /* ========== Scroll-Reveal Animationen (hochprofessionell) ========== */
 .reveal {
@@ -227,8 +269,11 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 }
 
 .nav-main a {
-  display: block;
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  min-height: 44px;
+  box-sizing: border-box;
   font-weight: 500;
   color: var(--color-primary);
   border-radius: var(--radius);
@@ -294,6 +339,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
+  min-height: 44px;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 1rem;
@@ -343,7 +389,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 }
 
 .btn-secondary:hover {
-  background: var(--color-primary-light);
+  background: var(--color-accent-hover);
   transform: translateY(-1px);
   box-shadow: var(--shadow-hover);
 }
@@ -581,20 +627,31 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   margin: 0 auto;
 }
 
+.hero-form-card input,
+.contact-form input,
+.contact-form select {
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.contact-form textarea {
+  min-height: 120px;
+  box-sizing: border-box;
+}
+
 .hero-form-card input {
   width: 100%;
-  padding: 0.65rem 1rem;
+  padding: 0.75rem 1rem;
   font-family: var(--font-body);
   font-size: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .hero-form-card input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.15);
+  box-shadow: 0 0 0 3px var(--color-border-focus);
 }
 
 .hero-quick-form .form-group {
@@ -667,8 +724,73 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 
 /* Unsere Schritte (Referenz: 01. 02. 03. mit Timeline) – Ablauf nacheinander sichtbar */
 .steps-section {
-  padding: 3.5rem 0;
+  padding: var(--section-padding-y) 0;
   background: var(--color-bg);
+}
+
+.steps-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Utility: Absätze mit CTA-Button */
+.content-cta {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Testimonial-Karten (Referenzen) */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  margin: 0;
+  border-left: 4px solid var(--color-primary);
+}
+
+.testimonial-card p {
+  margin: 0 0 1rem;
+  font-style: italic;
+  color: var(--color-text);
+}
+
+.testimonial-card footer {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.contact-region-note {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Verstecktes Iframe für Formular-Submit (n8n) */
+.n8n-iframe {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  border: 0;
 }
 
 /* Titel erscheint zuerst */
@@ -821,7 +943,7 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
 
 /* ========== Sections ========== */
 .section {
-  padding: 4rem 0;
+  padding: var(--section-padding-y) 0;
 }
 
 .section-alt {
@@ -843,6 +965,12 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   color: var(--color-text);
   margin: 0 0 2rem;
   max-width: 720px;
+}
+
+.section-intro--center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ========== USP / Feature Cards ========== */
@@ -869,6 +997,15 @@ h3 { font-size: clamp(1.2rem, 2vw, 1.4rem); }
   max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.system-cards--top {
+  margin-top: 2rem;
+}
+
+.system-card .card-cta {
+  margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 .system-card {
@@ -1149,9 +1286,9 @@ img.img-placeholder {
   padding: 0.75rem 1rem;
   font-family: var(--font-body);
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: var(--radius);
-  transition: border-color var(--transition);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 
 .form-group input:focus,
@@ -1159,7 +1296,7 @@ img.img-placeholder {
 .form-group select:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.15);
+  box-shadow: 0 0 0 3px var(--color-border-focus);
 }
 
 .form-group textarea {
@@ -1195,7 +1332,8 @@ img.img-placeholder {
 .contact-info {
   background: var(--color-bg-alt);
   padding: 1.5rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
 }
 
 .contact-info h3 {
@@ -1389,8 +1527,23 @@ img.img-placeholder {
 
 /* ========== Responsive ========== */
 @media (max-width: 768px) {
+  :root {
+    --section-padding-y: var(--section-padding-y-mobile);
+  }
+
+  .section {
+    padding: var(--section-padding-y-mobile) 0;
+  }
+
+  .steps-section {
+    padding: var(--section-padding-y-mobile) 0;
+  }
+
   .nav-toggle {
     display: block;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
   }
 
   .header-nav-wrap {
@@ -1404,17 +1557,29 @@ img.img-placeholder {
     left: 0;
     right: 0;
     background: var(--color-white);
-    padding: 1rem;
-    box-shadow: var(--shadow);
+    padding: 1rem 1.25rem 1.25rem;
+    box-shadow: var(--shadow-card);
     z-index: 50;
   }
 
   .header-nav-wrap.is-open .nav-main {
     flex-direction: column;
+    gap: 0.25rem;
   }
 
   .header-phone {
     display: none;
+  }
+  .header-nav-wrap.is-open .header-phone-mobile {
+    display: flex !important;
+    justify-content: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .header-phone-mobile .btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .nav-main {
@@ -1427,6 +1592,7 @@ img.img-placeholder {
 
   .nav-main a {
     color: var(--color-dark);
+    padding: 0.75rem 1rem;
   }
   .nav-main a:hover,
   .nav-main a[aria-current="page"] {
@@ -1437,36 +1603,75 @@ img.img-placeholder {
   .contact-grid,
   .two-col {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .footer-inner {
     grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-inner h4 {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-inner ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-cta {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+    padding: 2rem 0;
+  }
+
+  .footer-cta h2 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  .footer-bottom {
+    padding-top: 1.75rem;
   }
 
   .steps-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .steps-grid::before {
     display: none;
   }
 
-  .cta-strip,
-  .footer-cta {
-    flex-direction: column;
-    text-align: center;
+  .steps-title {
+    margin-bottom: 2rem;
   }
 
+  .step-item {
+    padding: 0.5rem 0;
+  }
+
+  .cta-strip {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+
+  /* Hero: mobil hochwertig, kein Gequetscht */
   .hero,
   .hero-with-image {
-    padding: 3rem 0;
+    padding: 2.5rem 0 3rem;
     min-height: auto;
     text-align: center;
   }
 
   .hero-split {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
+    padding: 0;
   }
 
   .hero-content {
@@ -1477,15 +1682,30 @@ img.img-placeholder {
   .hero-content .lead {
     margin-left: auto;
     margin-right: auto;
+    font-size: 1.05rem;
+    line-height: 1.55;
   }
 
-  .hero-buttons {
-    justify-content: center;
+  .hero-trust-badge {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.25rem;
   }
 
   .hero-with-image .hero-title-wrap {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .hero-with-image h1 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  .hero-with-image .hero-accent {
+    font-size: 1.75rem;
+    margin: 0.25rem 0 0.5rem;
   }
 
   .hero-with-image .hero-line {
@@ -1493,13 +1713,155 @@ img.img-placeholder {
     width: 60px;
   }
 
+  .hero-buttons {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .hero-buttons .btn {
+    min-width: 0;
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+  }
+
   .hero .btn {
     display: block;
     margin: 0.5rem 0;
   }
 
+  /* Hero-Formular: mobil exzellent bedienbar */
+  .hero-form-card {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.75rem 1.25rem;
+    order: 2;
+  }
+
+  .hero-form-card .form-group {
+    margin-bottom: 1.125rem;
+  }
+
+  .hero-form-card input {
+    padding: 0.75rem 1rem;
+    font-size: 16px; /* verhindert Zoom auf iOS */
+  }
+
+  .hero-form-card .btn {
+    padding: 0.85rem 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Kontaktformular mobil */
+  .contact-form .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-form input,
+  .contact-form select {
+    font-size: 16px;
+    padding: 0.75rem 1rem;
+  }
+
+  .contact-form textarea {
+    font-size: 16px;
+    min-height: 140px;
+    padding: 0.75rem 1rem;
+  }
+
+  .contact-form .btn {
+    padding: 0.85rem 1.25rem;
+    margin-top: 0.25rem;
+  }
+
+  .contact-info {
+    padding: 1.5rem 1.25rem;
+  }
+
+  /* Karten mobil sauber */
   .system-cards {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .system-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .system-card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  .system-card p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .welcome-block .two-col {
+    gap: 1.5rem;
+  }
+
+  .welcome-text .block-title {
+    font-size: 1.35rem;
+  }
+
+  .quote-card {
+    padding: 1.25rem 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .page-intro .intro-tagline {
+    font-size: 1.4rem;
+  }
+
+  .block-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Sehr kleine Viewports: Abstände noch etwas lockern */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-with-image {
+    padding: 2rem 0 2.5rem;
+  }
+
+  .hero-form-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-with-image .hero-accent {
+    font-size: 1.6rem;
+  }
+
+  .footer-cta {
+    padding: 1.75rem 0;
+  }
+
+  .footer-inner {
+    gap: 1.75rem;
+  }
+
+  .system-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .steps-cta .btn {
+    width: 100%;
   }
 }
 

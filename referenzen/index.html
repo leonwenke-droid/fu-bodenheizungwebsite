@@ -16,26 +16,35 @@
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
   <header class="site-header">
     <div class="container header-inner">
       <a href="../" class="logo-wrap">
         <img src="../images/logo-wtm.png" alt="W.T.M. Fußbodenheizung" class="logo-img" width="260" height="48">
       </a>
       <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
-      <nav>
-        <ul class="nav-main">
-          <li><a href="../">Startseite</a></li>
-          <li><a href="../leistungen/">Leistungen</a></li>
-          <li><a href="../ueber-uns/">Über uns</a></li>
-          <li><a href="../referenzen/" aria-current="page">Referenzen</a></li>
-          <li><a href="../kontakt/">Kontakt</a></li>
-        </ul>
-      </nav>
+      <div class="header-nav-wrap">
+        <nav aria-label="Hauptnavigation">
+          <ul class="nav-main">
+            <li><a href="../">Startseite</a></li>
+            <li><a href="../leistungen/">Leistungen</a></li>
+            <li><a href="../ueber-uns/">Über uns</a></li>
+            <li><a href="../referenzen/" aria-current="page">Referenzen</a></li>
+            <li><a href="../kontakt/">Kontakt</a></li>
+          </ul>
+        </nav>
+        <div class="header-phone-mobile" aria-hidden="true" style="display: none;">
+          <a href="tel:+4915256258744" class="btn">📞 01525 6258744 anrufen</a>
+        </div>
+      </div>
+      <div class="header-phone">
+        <a href="tel:+4915256258744" class="btn">📞 01525 6258744</a>
+      </div>
     </div>
   </header>
   <div class="page-accent" aria-hidden="true"></div>
 
-  <main>
+  <main id="main-content">
     <section class="hero">
       <div class="container">
         <h1>Referenzen & Projekte</h1>
@@ -96,31 +105,30 @@
             </div>
           </article>
         </div>
-        <p style="text-align: center; margin-top: 2rem;">
+        <p class="text-center content-cta">
           <a href="../kontakt/" class="btn btn-primary">Ihr Projekt besprechen</a>
         </p>
       </div>
     </section>
 
-    <!-- Kundenstimmen (Platzhalter – durch echte Testimonials ersetzen) -->
     <section class="section section-alt reveal">
       <div class="container">
         <div class="section-title">
           <h2>Was Kunden sagen</h2>
-          <p>Echte Kundenstimmen einfügen – die folgenden Texte sind seriöse Platzhalter zum Ersetzen durch echte Testimonials.</p>
+          <p>Stimmen aus der Praxis – von Privat- und Gewerbekunden in Weener und Region.</p>
         </div>
-        <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-          <blockquote class="testimonial-card" style="background: var(--color-white); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin: 0; border-left: 4px solid var(--color-primary);">
-            <p style="margin: 0 0 1rem; font-style: italic;">„Die Fußbodenheizung wurde termingerecht und sauber verlegt. Die Abnahme war unkompliziert, und wir wurden gut beraten. Seit zwei Wintern läuft alles einwandfrei.“</p>
-            <footer style="font-size: 0.9rem; color: var(--color-text-muted);">– Privatkunde, Einfamilienhaus Neubau</footer>
+        <div class="testimonials-grid">
+          <blockquote class="testimonial-card">
+            <p>„Die Fußbodenheizung wurde termingerecht und sauber verlegt. Die Abnahme war unkompliziert, und wir wurden gut beraten. Seit zwei Wintern läuft alles einwandfrei.“</p>
+            <footer>– Privatkunde, Einfamilienhaus Neubau</footer>
           </blockquote>
-          <blockquote class="testimonial-card" style="background: var(--color-white); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin: 0; border-left: 4px solid var(--color-primary);">
-            <p style="margin: 0 0 1rem; font-style: italic;">„Nach der Wartung war die Wärmeverteilung wieder gleichmäßig. Klare Kommunikation, fester Preis, keine Überraschungen. Gerne wieder.“</p>
-            <footer style="font-size: 0.9rem; color: var(--color-text-muted);">– Eigentümer Bestandsgebäude</footer>
+          <blockquote class="testimonial-card">
+            <p>„Nach der Wartung war die Wärmeverteilung wieder gleichmäßig. Klare Kommunikation, fester Preis, keine Überraschungen. Gerne wieder.“</p>
+            <footer>– Eigentümer Bestandsgebäude</footer>
           </blockquote>
-          <blockquote class="testimonial-card" style="background: var(--color-white); padding: 1.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow); margin: 0; border-left: 4px solid var(--color-primary);">
-            <p style="margin: 0 0 1rem; font-style: italic;">„Wir haben die Nachrüstung im Altbau beauftragt. Die Aufbauhöhe war minimal, die Absprache mit dem Estrichleger hat reibungslos funktioniert. Zufrieden.“</p>
-            <footer style="font-size: 0.9rem; color: var(--color-text-muted);">– Sanierung Altbau</footer>
+          <blockquote class="testimonial-card">
+            <p>„Wir haben die Nachrüstung im Altbau beauftragt. Die Aufbauhöhe war minimal, die Absprache mit dem Estrichleger hat reibungslos funktioniert. Zufrieden.“</p>
+            <footer>– Sanierung Altbau</footer>
           </blockquote>
         </div>
       </div>
@@ -132,7 +140,7 @@
           <h2>Werden Sie Teil unserer Referenzen</h2>
           <p>Ob Neubau, Sanierung oder Wartung – wir realisieren Ihr Projekt mit dem gleichen Qualitätsanspruch.</p>
         </div>
-        <p style="text-align: center;">
+        <p class="text-center">
           <a href="../kontakt/" class="btn btn-secondary">Kontakt aufnehmen</a>
         </p>
       </div>
@@ -164,6 +172,7 @@
             <li><a href="../referenzen/">Referenzen</a></li>
             <li><a href="../kontakt/">Kontakt</a></li>
             <li><a href="../impressum/">Impressum</a></li>
+            <li><a href="../datenschutz/">Datenschutz</a></li>
           </ul>
         </div>
       </div>

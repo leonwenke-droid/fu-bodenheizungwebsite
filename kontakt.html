@@ -4,8 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Kontakt: Fußbodenheizung Installation, Wartung und Modernisierung in Weener. Kostenloses Angebot, Beratung oder Wartungstermin – Telefon, E-Mail oder Formular.">
-  <meta name="keywords" content="Fußbodenheizung, Kontakt, Weener, Angebot, Beratung, Installation, Wartung">
   <title>Kontakt | Fußbodenheizung Weener – Angebot & Beratung</title>
+  <link rel="canonical" href="https://wtm-fussbodenheizung.de/kontakt/">
+  <meta property="og:title" content="Kontakt | Fußbodenheizung Weener – Angebot & Beratung">
+  <meta property="og:description" content="Kostenloses Angebot, Beratung oder Wartungstermin. Telefon, E-Mail oder Kontaktformular – wir melden uns zeitnah.">
+  <meta property="og:url" content="https://wtm-fussbodenheizung.de/kontakt/">
+  <meta property="og:type" content="website">
+  <meta name="robots" content="index, follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
@@ -16,26 +21,35 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
   <header class="site-header">
     <div class="container header-inner">
       <a href="./" class="logo-wrap">
         <img src="images/logo-wtm.png" alt="W.T.M. Fußbodenheizung" class="logo-img" width="260" height="48">
       </a>
       <button type="button" class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">☰</button>
-      <nav>
-        <ul class="nav-main">
-          <li><a href="./">Startseite</a></li>
-          <li><a href="leistungen/">Leistungen</a></li>
-          <li><a href="ueber-uns/">Über uns</a></li>
-          <li><a href="referenzen/">Referenzen</a></li>
-          <li><a href="kontakt/" aria-current="page">Kontakt</a></li>
-        </ul>
-      </nav>
+      <div class="header-nav-wrap">
+        <nav aria-label="Hauptnavigation">
+          <ul class="nav-main">
+            <li><a href="./">Startseite</a></li>
+            <li><a href="leistungen/">Leistungen</a></li>
+            <li><a href="ueber-uns/">Über uns</a></li>
+            <li><a href="referenzen/">Referenzen</a></li>
+            <li><a href="kontakt/" aria-current="page">Kontakt</a></li>
+          </ul>
+        </nav>
+        <div class="header-phone-mobile" aria-hidden="true" style="display: none;">
+          <a href="tel:+4915256258744" class="btn">📞 01525 6258744 anrufen</a>
+        </div>
+      </div>
+      <div class="header-phone">
+        <a href="tel:+4915256258744" class="btn">📞 01525 6258744</a>
+      </div>
     </div>
   </header>
   <div class="page-accent" aria-hidden="true"></div>
 
-  <main>
+  <main id="main-content">
     <section class="hero">
       <div class="container">
         <h1>Kontakt – Wir freuen uns auf Ihre Nachricht</h1>
@@ -50,7 +64,7 @@
         <div class="contact-grid">
           <div>
             <h2>Anfrage senden</h2>
-            <p id="form-intro">Füllen Sie das Formular aus. Ihre Nachricht wird direkt an uns gesendet. Wir melden uns zeitnah.</p>
+            <p id="form-intro">Füllen Sie das Formular aus. Ihre Nachricht wird direkt an uns gesendet. Wir melden uns in der Regel innerhalb eines Werktags – Ihr Ansprechpartner in Weener und Region.</p>
             <div id="form-success" class="form-success-msg" role="alert" hidden>
               <strong>Vielen Dank.</strong> Ihre Nachricht wurde gesendet. Wir melden uns in Kürze bei Ihnen.
             </div>
@@ -85,7 +99,7 @@
               </div>
               <button type="submit" class="btn btn-primary contact-form-submit">Nachricht senden</button>
             </form>
-            <iframe name="n8n_target" id="n8n_target" title="n8n submit target" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;border:0;" aria-hidden="true"></iframe>
+            <iframe name="n8n_target" id="n8n_target" class="n8n-iframe" title="Formular-Ziel (versteckt)" aria-hidden="true"></iframe>
           </div>
           <div>
             <div class="contact-info">
@@ -103,9 +117,9 @@
               <p><strong>Erreichbarkeit:</strong><br>
                 Mo–Fr 8:00–17:00 Uhr<br>
                 Termine nach Vereinbarung</p>
-              <p style="margin-top: 1rem;">Wir sind in Weener und der Region Norddeutschland für Sie da – Privat- und Gewerbekunden.</p>
+              <p class="contact-region-note">Wir sind in Weener und der Region Norddeutschland für Sie da – Privat- und Gewerbekunden.</p>
             </div>
-            <p style="margin-top: 1.5rem;">
+            <p class="content-cta">
               <a href="leistungen/" class="btn btn-outline">Leistungen ansehen</a>
             </p>
           </div>
@@ -119,9 +133,9 @@
           <h2>Lieber direkt anrufen oder schreiben?</h2>
           <p>Wir beraten Sie gern zu Fußbodenheizung Installation, Wartung und Modernisierung – unverbindlich und auf Sie zugeschnitten.</p>
         </div>
-        <p style="text-align: center;">
+        <p class="text-center btn-group">
           <a href="tel:+4915256258744" class="btn btn-primary">01525 6258744</a>
-          <a href="mailto:Alexwwtm@gmail.com" class="btn btn-secondary" style="margin-left: 0.5rem;">E-Mail schreiben</a>
+          <a href="mailto:Alexwwtm@gmail.com" class="btn btn-secondary">E-Mail schreiben</a>
         </p>
       </div>
     </section>
@@ -152,6 +166,7 @@
             <li><a href="referenzen/">Referenzen</a></li>
             <li><a href="kontakt/">Kontakt</a></li>
             <li><a href="impressum/">Impressum</a></li>
+            <li><a href="datenschutz/">Datenschutz</a></li>
           </ul>
         </div>
       </div>
